@@ -7,14 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}-pthread")
 
 
-
+SET(MYCOMPILE_FLAGS "-Wall -Werror -Wpedantic")
+SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${MYCOMPILE_FLAGS}")
 add_compile_options("-lgcov --coverage")
-
-
-
 
 add_executable(main main.c)
 
+target_link_libraries(main gcov)
 
 set(LIB_SOURCE_FILES_GENERAL general_functions.c)
 add_library(general_functions STATIC ${LIB_SOURCE_FILES_GENERAL})
@@ -53,9 +52,7 @@ else()
 endif()
 
 
-
-
-target_link_libraries(main gcov)
+#target_link_libraries(main gcov)
 
 
 
