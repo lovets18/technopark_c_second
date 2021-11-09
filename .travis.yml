@@ -26,7 +26,7 @@ script:
     - make
     - valgrind --leak-check=yes --track-origins=yes --error-exitcode=33 -s ./general_functions_test
     - valgrind --leak-check=yes --error-exitcode=33 -s ./static_test
-    - gcovr -r .. --html --html-details -o coverage.html
+    - gcovr -r ..
     - cppcheck --enable=all --inconclusive --library=posix ../general_functions_test.cpp
     - cppcheck --enable=all --inconclusive --library=posix ../static_test.cpp
     - time -p ./main
@@ -38,7 +38,7 @@ script:
     - make
     - valgrind --leak-check=yes --error-exitcode=33 -s ./general_functions_test
     - valgrind --leak-check=yes --error-exitcode=33 -s ./dynamic_test
-    - gcovr -r .. --html --html-details -o coverage.html
+    - gcovr -r ..
     - cppcheck --enable=all --inconclusive --library=posix ../general_functions_test.cpp
     - cppcheck --enable=all --inconclusive --library=posix ../dynamic_test.cpp
     - time -p ./main

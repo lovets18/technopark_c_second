@@ -8,7 +8,7 @@ extern "C" {
 
 
 
-TEST(GET_NUMS, Assert_True) {
+TEST(GET_NUMS, ARRAYS_EQUAL) {
   int number = 12345;
   int expected_result[10] = { 0, 1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 };
   int real_result[10] = { 0 };
@@ -20,7 +20,7 @@ TEST(GET_NUMS, Assert_True) {
   EXPECT_TRUE(equal);
 }
 
-TEST(WRITE_READ_FILE, Assert_True) {
+TEST(WRITE_READ_FILE, ARRAYS_EQUAL) {
   int expected_result[4] = { 0 };
   int real_result[4] = { 1, 2, 3, 4 };
   write_file("testfile.txt", real_result, 4);
@@ -33,7 +33,7 @@ TEST(WRITE_READ_FILE, Assert_True) {
 }
 
 
-TEST(WRITE_READ_BIGGER_FILE, Assert_True) {
+TEST(WRITE_READ_BIGGER_FILE, ARRAYS_EQUAL) {
   int expected_result[4] = { 0 };
   int real_result[6] = { 1, 2, 3, 4, 5, 6 };
   write_file("testfile.txt", real_result, 4);
@@ -45,12 +45,12 @@ TEST(WRITE_READ_BIGGER_FILE, Assert_True) {
   EXPECT_TRUE(equal);
 }
 
-TEST(GET_MEDIAN, Assert_True) {
+TEST(GET_MEDIAN, NUMS_EQUAL) {
   int arr[5] = { 5, 1, 4, 3, 2};
   EXPECT_EQ(3, get_median(arr, 5));
 }
 
-TEST(SORT_ARR, Assert_Eq) {
+TEST(SORT_ARR, ARRAYS_EQUAL) {
   int expected_result[5] = { 1, 2, 3, 4, 5 };
   int real_result[5] = { 5, 1, 4, 3, 2};
   sort(real_result, 5);
@@ -62,39 +62,8 @@ TEST(SORT_ARR, Assert_Eq) {
 }
 
 
-TEST(PRINT_ARR, Assert_Eq) {
+TEST(PRINT_ARR, LINES_EQUAL) {
   
-  /*FILE* f;
-  if ((f = fopen("printarr.txt", "w")) == NULL)
-    fprintf(stderr, "Failed to open file for write\n");
-  else {
-    int real_result[5] = { 1, 2, 3, 4, 5};
-    printarr(f, real_result, 5);
-
-    if (fclose(f)) {
-      fprintf(stderr, "Failed to close file\n"); 
-      
-    }
-
-  }
-  char str[39] = "string";
-
-  if ((f = fopen("printarr.txt", "r")) == NULL) {
-      fprintf(stderr, "Failed to open file for read\n");
-  }
-  else {
-    if (fread(str, sizeof(str), 1, f) < 0) {
-      fprintf(stderr, "Failed to read\n");
-    }
-
-    if (fclose(f)) {
-      fprintf(stderr, "Failed to close file");
-    }
-  }
-  printf("STR %s\n", str);
-  EXPECT_EQ(strcmp(str, "| 0: 1 || 1: 2 || 2: 3 || 3: 4 || 4: 5 "), 0);
-  EXPECT_EQ(1, 1);*/
-
   FILE* f;
 
   if ((f = fopen("printarr.txt", "w")) == NULL)
@@ -128,7 +97,7 @@ TEST(PRINT_ARR, Assert_Eq) {
 }
 
 
-TEST(PRINT_HIST, Assert_Eq) {
+TEST(PRINT_HIST, LINES_EQUAL) {
   FILE* f;
 
   if ((f = fopen("printhist.txt", "w")) == NULL)

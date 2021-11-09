@@ -25,8 +25,14 @@ TEST(ARR_BIGGER_ZERO, Assert_True) {
 }
 
 TEST(ARR_BIGGER_ZERO, Assert_False) {
-  
   int arr[5] = { 0, 1, 2, 3, 4 };
+  int flag = arr_bigger_zero(arr, 5);
+  
+  EXPECT_FALSE(flag);
+}
+
+TEST(ARR_BIGGER_ZERO_INCORRECT, Assert_False) {
+  int *arr = NULL;
   int flag = arr_bigger_zero(arr, 5);
   
   EXPECT_FALSE(flag);
@@ -38,7 +44,6 @@ TEST(SUM_ARRS, Assert_True) {
   int arr1[5] = { 0, 1, 2, 3, 4 };
   int arr2[5] = { 0, 1, 2, 3, 4 };
   int expected_result[5] = { 0, 2, 4, 6, 8 };
-  int real_result[5] = { 0 };
   sum_arrs(arr1, arr2, 5);
   bool equal = true;
   for (int i = 0; i < 5; ++i) {

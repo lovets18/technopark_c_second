@@ -15,7 +15,7 @@
 
 
 //write arr to file
-void write_file(const char* filename, int* arr, int n) {
+void write_file(const char* filename, int* arr, size_t n) {
     FILE* f;
     f = fopen(filename, "w");
 
@@ -35,7 +35,7 @@ void write_file(const char* filename, int* arr, int n) {
 }
 
 //read arr from file
-void read_file(const char* filename, int* arr, int n) {
+void read_file(const char* filename, int* arr, size_t n) {
     FILE* f;
 
     if ((f = fopen(filename, "r")) == NULL) {
@@ -66,9 +66,9 @@ void get_nums(int number, int* num_count) {
 }
 
 
-void sort(int* arr,int n){
-	for(int i=1;i<n;i++){
-		for(int j=i; j>0 && arr[j-1]>arr[j];j--){
+void sort(int* arr, size_t n){
+	for(int i=1; i<n; i++){
+		for(int j=i; j>0 && arr[j-1]>arr[j]; j--){
 			int tmp=arr[j-1];
 			arr[j-1]=arr[j];
 			arr[j]=tmp;
@@ -77,7 +77,7 @@ void sort(int* arr,int n){
 }
 
 
-int get_median(int* arr, int size) {
+int get_median(int* arr, size_t size) {
     int *sort_arr = (int*)malloc(size * sizeof(int));
     for (int i = 0; i < size; ++i) {
         sort_arr[i] = arr[i];
@@ -90,7 +90,7 @@ int get_median(int* arr, int size) {
 
 
 //print the histogramm of array indexes and values
-void print_hist(FILE * f, int* arr, int size, int scale, char sym) {
+void print_hist(FILE * f, int* arr, size_t size, int scale, char sym) {
     int max = 0;
     for (int i = 0; i < size; ++i) {
         if (arr[i] > max) max = arr[i];
@@ -105,7 +105,7 @@ void print_hist(FILE * f, int* arr, int size, int scale, char sym) {
 
 
 
-void printarr(FILE * f, int *arr, int size) {
+void printarr(FILE * f, int *arr, size_t size) {
 
     if (!f) fprintf(stderr, "INCORRECT STREAM\n");
 

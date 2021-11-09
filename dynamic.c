@@ -12,7 +12,11 @@
 #include "interface.h"
 
 // check that arr elems are > 0
-static int arr_bigger_zero(int *arr, int size) {
+static int arr_bigger_zero(int *arr, size_t size) {
+    if (!arr) {
+        fprintf(stderr, "The array doesn't exist\n");
+        return 0;
+    }
     for (int i = 0; i < size; ++i) {
         if (arr[i] <= 0) return 0;
     }
@@ -20,7 +24,7 @@ static int arr_bigger_zero(int *arr, int size) {
 }
 
 // sum 2 arrs, the result in the first one
-static void sum_arrs(int *arr1, int* arr2, int size) {
+static void sum_arrs(int *arr1, int* arr2, size_t size) {
     for (int i = 0; i < size; ++i) {
         arr1[i] += arr2[i];
     }
@@ -30,8 +34,8 @@ static void sum_arrs(int *arr1, int* arr2, int size) {
 static void parent_sum_arr( int *nums_first, int *nums_second, 
                             int *first, int *second, 
                             int* sum_first, int* sum_second,
-                            int *fd[], int n_proc,
-                            int curID, int size) {
+                            int *fd[], size_t n_proc,
+                            int curID, size_t size) {
     if (read(fd[n_proc-1][0], &curID, sizeof(curID)) < 0) err(EX_SOFTWARE, "read pipes curID");                               
     for (int i = curID; i < size; ++i) {
         get_nums(first[i], nums_first);
@@ -43,7 +47,7 @@ static void parent_sum_arr( int *nums_first, int *nums_second,
 
 
 //wait child processes
-static void wait_childs(int *p, int n_proc) {
+static void wait_childs(int *p, size_t n_proc) {
     for (int i = 0; i < n_proc; ++i) {
         int status;
         pid_t result = waitpid(-1, &status, 0);
@@ -62,9 +66,9 @@ static void wait_childs(int *p, int n_proc) {
     }
 }
 
-void get_nums_arrs(int *sum_first, int *sum_second, int *first, int *second, int size) {
+void get_nums_arrs(int *sum_first, int *sum_second, int *first, int *second, size_t size) {
     //prepare variables
-    int n_proc = 2 * sysconf(_SC_NPROCESSORS_ONLN); // the number of cores * 2 = the number of procs
+    size_t n_proc = 2 * sysconf(_SC_NPROCESSORS_ONLN); // the number of cores * 2 = the number of procs
     pid_t *p = (pid_t*)malloc(n_proc*sizeof(pid_t));;
     int **fd = (int**)malloc(2*n_proc*sizeof(int*));
     for (int i = 0; i < 2*n_proc; ++i) {

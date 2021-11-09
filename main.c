@@ -8,9 +8,14 @@
 
 int main()
 {
-    int n = 100000000;
+    size_t n = 100000000;
     int * first = (int*)malloc(n * sizeof(int));
     int * second = (int*)malloc(n * sizeof(int));
+
+    if (!first || !second) {
+        fprintf(stderr, "The memory wasn't alocated");
+        return -1;
+    }
     
     int digits_first[10] = { 0 };
     int digits_second[10] = { 0 };
